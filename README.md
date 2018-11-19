@@ -13,7 +13,7 @@ yarn add --dev package-version-manifest
 ### Writing to a file
 
 ```sh
-yarn package-version-manifest > manifest.txt
+yarn -s package-version-manifest > manifest.txt
 ```
 
 The output format is the following
