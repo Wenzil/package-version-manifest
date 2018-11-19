@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "noImplicitReturns": true,
+        "noUnusedLocals": true,
+        "noImplicitThis": true,
+        "forceConsistentCasingInFileNames": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "outDir": "./dist",
+        "moduleResolution": "node",
+        "module": "commonjs",
+        "target": "es6",
+        "lib": ["es2017", "esnext"],
+        "inlineSources": true,
+        "inlineSourceMap": true,
+        "declaration": true
+    },
+    "exclude": ["scripts", "node_modules", "dist"]
+}

@@ -1,0 +1,12 @@
+{
+    "extends": [
+        "tslint:latest",
+        "tslint-plugin-prettier",
+        "tslint-config-prettier"
+    ],
+    "rules": {
+        "no-console": false,
+        "no-implicit-dependencies": [true, ["ava"]],
+        "prettier": true
+    }
+}
