@@ -36,5 +36,5 @@ pre=beta.1
 
 ### Loading as environment variables
 
-source <(yarn package-version-manifest)
+source <(yarn -s package-version-manifest)
 echo "Package version: $major.$minor.$patch (${pre:-final})"

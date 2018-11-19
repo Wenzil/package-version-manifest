@@ -1,6 +1,6 @@
 {
     "name": "package-version-manifest",
-    "version": "1.0.0-alpha.3",
+    "version": "1.0.0",
     "description": "Simple CLI to generate package version manifests",
     "author": {
         "name": "Sami Turcotte",
