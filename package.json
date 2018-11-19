@@ -1,7 +1,13 @@
 {
     "name": "package-version-manifest",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Simple CLI to generate package version manifests",
+    "keywords": [
+        "package",
+        "semver",
+        "version",
+        "manifest"
+    ],
     "author": {
         "name": "Sami Turcotte",
         "email": "samiturcotte@gmail.com"
