@@ -1,6 +1,6 @@
 {
     "name": "package-version-manifest",
-    "version": "1.0.3",
+    "version": "1.1.0-beta.0",
     "description": "Simple CLI to generate package version manifests",
     "keywords": [
         "package",
@@ -20,10 +20,12 @@
     ],
     "license": "MIT",
     "bin": {
-      "package-version-manifest": "./dist/index.js"
+        "package-version-manifest": "./dist/index.js"
     },
-    "types": "dist/index.d.ts",
-    "files": ["dist"],
+    "types": "dist/**/*.d.ts",
+    "files": [
+        "dist"
+    ],
     "repository": {
         "url": "git@github.com:Wenzil/package-version-manifest.git",
         "type": "git"
@@ -32,14 +34,16 @@
         "test": "ava",
         "lint": "tslint -p tsconfig.json",
         "validate:tslint": "tslint-config-prettier-check ./tslint.json",
-        "prepublish": "yarn lint && yarn test && yarn tsc"
+        "prepublishOnly": "yarn lint && yarn test && yarn tsc"
     },
     "dependencies": {
-        "semver": "^5.6.0"
+        "semver": "^5.6.0",
+        "yargs": "^12.0.5"
     },
     "devDependencies": {
         "@types/node": "^10.10.1",
         "@types/semver": "^5.5.0",
+        "@types/yargs": "^12.0.1",
         "ava": "^1.0.0-rc.2",
         "prettier": "^1.14.3",
         "ts-node": "^7.0.1",
