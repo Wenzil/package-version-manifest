@@ -6,14 +6,17 @@ interface IManifest {
     pre: string;
 }
 export function buildManifest(version: string): IManifest {
-    if (semver.valid(version) === null) {
-        throw new Error(`Invalid version: ${version}`);
+    const coercedVersion = semver.coerce(version);
+    if (coercedVersion === null) {
+        throw new Error(`Invalid version: ${coercedVersion}`);
     } else {
-        const prerelease = semver.prerelease(version);
+        const prerelease = semver.valid(version)
+            ? semver.prerelease(version)
+            : null;
         return {
-            major: semver.major(version),
-            minor: semver.minor(version),
-            patch: semver.patch(version),
+            major: semver.major(coercedVersion),
+            minor: semver.minor(coercedVersion),
+            patch: semver.patch(coercedVersion),
             pre: prerelease == null ? "" : prerelease.join("."),
         };
     }

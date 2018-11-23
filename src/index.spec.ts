@@ -42,6 +42,67 @@ test.cb("Outputs the package version by default", t => {
         .on("end", t.end);
 });
 
+test.cb("Outputs only the major version if 'major' format is specified", t => {
+    t.plan(1);
+    exec("ts-node src/index.ts 1.2.3 -o major")
+        .stdout.pipe(collect())
+        .on("data", collected => {
+            t.deepEqual(collected.toString(), "1\n");
+        })
+        .on("error", t.end)
+        .on("end", t.end);
+});
+
+test.cb("Outputs only the minor version if 'minor' format is specified", t => {
+    t.plan(1);
+    exec("ts-node src/index.ts 1.2.3 -o minor")
+        .stdout.pipe(collect())
+        .on("data", collected => {
+            t.deepEqual(collected.toString(), "2\n");
+        })
+        .on("error", t.end)
+        .on("end", t.end);
+});
+
+test.cb("Outputs only the patch version if 'patch' format is specified", t => {
+    t.plan(1);
+    exec("ts-node src/index.ts 1.2.3 -o patch")
+        .stdout.pipe(collect())
+        .on("data", collected => {
+            t.deepEqual(collected.toString(), "3\n");
+        })
+        .on("error", t.end)
+        .on("end", t.end);
+});
+
+test.cb(
+    "Outputs only the pre-release suffix if 'pre' format is specified",
+    t => {
+        t.plan(1);
+        exec("ts-node src/index.ts 1.2.3-beta.0 -o pre")
+            .stdout.pipe(collect())
+            .on("data", collected => {
+                t.deepEqual(collected.toString(), "beta.0\n");
+            })
+            .on("error", t.end)
+            .on("end", t.end);
+    },
+);
+
+test.cb(
+    "Outputs empty string if 'pre' format is specified and there is none",
+    t => {
+        t.plan(1);
+        exec("ts-node src/index.ts 1.2.3 -o pre")
+            .stdout.pipe(collect())
+            .on("data", collected => {
+                t.deepEqual(collected.toString(), "\n");
+            })
+            .on("error", t.end)
+            .on("end", t.end);
+    },
+);
+
 function collect() {
     let collected = Buffer.from([]);
     return new Transform({
