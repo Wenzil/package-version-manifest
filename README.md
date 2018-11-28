@@ -13,7 +13,7 @@ yarn add --dev package-version-manifest
 ### Basic example
 
 ```sh
-source <(yarn -s package-version-manifest [version])
+yarn -s package-version-manifest [version]
 ```
 
 By default, the version is printed out in the following format:
@@ -25,37 +25,42 @@ major=<z>
 pre=[<pre1>.<pre2> ...]
 ```
 
+This format is useful for [loading as environment variables in Bash](#loading-as-environment-variables-in-bash).
+
 If no version is specified, the package version defined in `package.json` is
 used.
 
 ### Writing to a file
 
 ```sh
-yarn -s package-version-manifest > manifest.txt
+yarn -s package-version-manifest > manifest.ini
 ```
 
-The output format is the following
-For example, a package version of `1.2.3-beta.1` will result in
-
-```
-major=1
-major=2
-major=3
-pre=beta.1
-```
-
-### Loading as environment variables
+### Loading as environment variables in Bash
 
 ```sh
 source <(yarn -s package-version-manifest)
 echo "Package version: $major.$minor.$patch (${pre:-final})"
 ```
 
+### Output formats
+
+
+```sh
+yarn -s package-version-manifest -o json
+```
+
+The version is then printed in JSON:
+
+```json
+{"major":<x>,"minor":<y>,"patch":<z>,"pre":"<pre1>.<pre2> ..."}
+```
+
 ### Extracting only the major, minor, patch version or pre-release suffix
 
 ```sh
-source <(yarn -s package-version-manifest -o major)
-source <(yarn -s package-version-manifest -o minor)
-source <(yarn -s package-version-manifest -o patch)
-source <(yarn -s package-version-manifest -o pre)
+yarn -s package-version-manifest -o major
+yarn -s package-version-manifest -o minor
+yarn -s package-version-manifest -o patch
+yarn -s package-version-manifest -o pre
 ```

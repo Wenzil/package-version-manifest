@@ -20,7 +20,7 @@ test.cb("Outputs the given version", t => {
         .on("end", t.end);
 });
 
-test.cb("Outputs the package version by default", t => {
+test.cb("Outputs the package version in INI format by default", t => {
     t.plan(1);
     const prerelease = semver.prerelease(packageVersion);
     exec("ts-node src/index.ts")
@@ -36,6 +36,26 @@ test.cb("Outputs the package version by default", t => {
                 ]
                     .join("\n")
                     .concat("\n"),
+            );
+        })
+        .on("error", t.end)
+        .on("end", t.end);
+});
+
+test.cb("Outputs the package version in JSON format if specified", t => {
+    t.plan(1);
+    const prerelease = semver.prerelease(packageVersion);
+    exec("ts-node src/index.ts -o json")
+        .stdout.pipe(collect())
+        .on("data", collected => {
+            t.deepEqual(
+                collected.toString(),
+                JSON.stringify({
+                    major: semver.major(packageVersion),
+                    minor: semver.minor(packageVersion),
+                    patch: semver.patch(packageVersion),
+                    pre: prerelease === null ? "" : prerelease.join("."),
+                }).concat("\n"),
             );
         })
         .on("error", t.end)

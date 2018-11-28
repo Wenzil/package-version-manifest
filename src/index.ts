@@ -23,7 +23,7 @@ yargs
                 })
                 .option("format", {
                     alias: "o",
-                    choices: ["ini", "major", "minor", "patch", "pre"],
+                    choices: ["ini", "json", "major", "minor", "patch", "pre"],
                     default: "ini",
                     description: "Output format",
                 }),
@@ -35,6 +35,9 @@ yargs
                     console.log(`minor=${minor}`);
                     console.log(`patch=${patch}`);
                     console.log(`pre=${pre}`);
+                    break;
+                case "json":
+                    console.log(JSON.stringify({ major, minor, patch, pre }));
                     break;
                 case "major":
                     console.log(major);
